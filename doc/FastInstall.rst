@@ -14,7 +14,7 @@ Clone with git the program files
 ::
 
     # cd /var/prtg/scriptsxml
-    # git clone ruta
+    # git clone https://github.com/P1R/OraMon4PRTG.git
 
 Give PRTG user permissions
 --------------------------
