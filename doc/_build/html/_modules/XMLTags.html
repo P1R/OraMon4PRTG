@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>XMLTags &mdash; OraMon4PRTG 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="OraMon4PRTG 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for XMLTags</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python2.7</span>
+
+<div class="viewcode-block" id="XMLTags"><a class="viewcode-back" href="../api.html#XMLTags.XMLTags">[docs]</a><span class="k">class</span> <span class="nc">XMLTags</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;This class handles the XMLtaging for PRTG&#39;s Advance Script</span>
+<span class="sd">    requirements&#39;&#39;&#39;</span>
+    
+    <span class="c">#add tags at constructor</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Add Dictionarry with XMLtag and position to append Data&#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Codes</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;Cha&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;channel&gt;&lt;/channel&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
+            <span class="s">&quot;Val&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;value&gt;&lt;/value&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+            <span class="s">&quot;Unt&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;unit&gt;&lt;/unit&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+            <span class="s">&quot;CsU&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;customUnit&gt;&lt;/customUnit&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+            <span class="s">&quot;SpS&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;speedsize&gt;&lt;/speedsize&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+            <span class="s">&quot;VoS&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;volumesize&gt;&lt;/volumesize&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+            <span class="s">&quot;SpT&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;speedtime&gt;&lt;/speedtime&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+            <span class="s">&quot;Mod&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;mode&gt;&lt;/mode&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+            <span class="s">&quot;Flt&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;float&gt;&lt;/float&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+            <span class="s">&quot;DcM&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;decimalmode&gt;&lt;/decimalmode&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span>
+            <span class="s">&quot;WAR&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;warning&gt;&lt;/warning&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
+            <span class="s">&quot;ShC&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;showchart&gt;&lt;/showchart&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+            <span class="s">&quot;ShT&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;showtable&gt;&lt;/showtable&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+            <span class="s">&quot;LME&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;limitmaxerror&gt;&lt;/limitmaxerror&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+            <span class="s">&quot;LMW&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;limitmaxwarning&gt;&lt;/limitmaxwarning&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span>
+            <span class="s">&quot;LmW&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;limitminwarning&gt;&lt;/limitminwarning&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span>
+            <span class="s">&quot;LmE&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;limitminerror&gt;&lt;/limitminerror&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+            <span class="s">&quot;LEM&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;limiterrormsg&gt;&lt;/limiterrormsg&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+            <span class="s">&quot;LWM&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;limitwarningmsg&gt;&lt;/limitwarningmsg&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span>
+            <span class="s">&quot;LiM&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;limitmode&gt;&lt;/limitmode&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+            <span class="s">&quot;VLu&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;valuelookup&gt;&lt;/valuelookup&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span>
+            <span class="s">&quot;TXT&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;text&gt;&lt;/text&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+            <span class="s">&quot;ERR&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;error&gt;&lt;/error&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+            <span class="s">&quot;PRT&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;prtg&gt;</span><span class="se">\n</span><span class="s">&lt;/prtg&gt;&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+            <span class="s">&quot;Res&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;&lt;result&gt;</span><span class="se">\n</span><span class="s">&lt;/result&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">9</span><span class="p">]}</span>
+
+<div class="viewcode-block" id="XMLTags.getData"><a class="viewcode-back" href="../api.html#XMLTags.XMLTags.getData">[docs]</a>    <span class="k">def</span> <span class="nf">getData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Opt</span><span class="p">,</span> <span class="n">Val</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        this function reads an Option code (see self.Codes) and a</span>
+<span class="sd">        Value so it can append to the dictionary  tags and  return</span>
+<span class="sd">        as an XML code</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Codes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Opt</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c">#search in Codes return tag until number+append</span>
+            <span class="c">#value+return endtag</span>
+            <span class="k">return</span> <span class="n">tag</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="n">tag</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="n">Val</span> <span class="o">+</span> <span class="n">tag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">tag</span><span class="p">[</span><span class="mi">1</span><span class="p">]:]</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="n">Tp</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">Val</span><span class="p">)</span>
+            <span class="c">#verify is a int or float and turn to string</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">Tp</span> <span class="o">==</span> <span class="nb">int</span> <span class="ow">or</span> <span class="n">Tp</span> <span class="o">==</span> <span class="nb">float</span><span class="p">):</span>
+                <span class="n">Val</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Val</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="n">Opt</span><span class="p">,</span> <span class="n">Val</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;Type Error: Must use either string, float or integer,&quot;</span>
+                <span class="k">print</span> <span class="s">&quot; as Val parameter&quot;</span>
+</div>
+<div class="viewcode-block" id="XMLTags.S3p"><a class="viewcode-back" href="../api.html#XMLTags.XMLTags.S3p">[docs]</a>    <span class="k">def</span> <span class="nf">S3p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Cha</span><span class="p">,</span> <span class="n">Unt</span><span class="p">,</span> <span class="n">Val</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; simple 3 parameters (channel, unit, value)&#39;&#39;&#39;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Res&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Cha&quot;</span><span class="p">,</span> <span class="n">Cha</span><span class="p">)</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Unt&quot;</span><span class="p">,</span> <span class="n">Unt</span><span class="p">)</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Val&quot;</span><span class="p">,</span> <span class="n">Val</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">x</span>
+</div>
+<div class="viewcode-block" id="XMLTags.ScU"><a class="viewcode-back" href="../api.html#XMLTags.XMLTags.ScU">[docs]</a>    <span class="k">def</span> <span class="nf">ScU</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Cha</span><span class="p">,</span> <span class="n">CsU</span><span class="p">,</span> <span class="n">Val</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;simple Custom Unit&#39;&#39;&#39;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Res&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Cha&quot;</span><span class="p">,</span> <span class="n">Cha</span><span class="p">)</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Unt&quot;</span><span class="p">,</span> <span class="s">&quot;Custom&quot;</span><span class="p">)</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;CsU&quot;</span><span class="p">,</span> <span class="n">CsU</span><span class="p">)</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Val&quot;</span><span class="p">,</span> <span class="n">Val</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">x</span></div>
+<div class="viewcode-block" id="XMLTags.SFP"><a class="viewcode-back" href="../api.html#XMLTags.XMLTags.SFP">[docs]</a>    <span class="k">def</span> <span class="nf">SFP</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Cha</span><span class="p">,</span> <span class="n">Val</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Simple Float Percent&#39;&#39;&#39;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Res&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Cha&quot;</span><span class="p">,</span> <span class="n">Cha</span><span class="p">)</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Flt&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Unt&quot;</span><span class="p">,</span><span class="s">&quot;Percent&quot;</span><span class="p">)</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Val&quot;</span><span class="p">,</span><span class="n">Val</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">x</span></div>
+<div class="viewcode-block" id="XMLTags.TblSpcs"><a class="viewcode-back" href="../api.html#XMLTags.XMLTags.TblSpcs">[docs]</a>    <span class="k">def</span> <span class="nf">TblSpcs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">TS</span><span class="p">,</span><span class="n">Val</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;TS = [ChanelName,MaxWarning,Maxerror],Value&#39;&#39;&#39;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Res&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Cha&quot;</span><span class="p">,</span> <span class="n">TS</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;LiM&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;LMW&quot;</span><span class="p">,</span> <span class="n">TS</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;LWM&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;Reached LimitWarning at &quot;</span> <span class="o">+</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">TS</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s">&quot;</span><span class="si">% o</span><span class="s">n &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">TS</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s">&quot; tablespace&quot;</span><span class="p">))</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;LME&quot;</span><span class="p">,</span> <span class="n">TS</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;LWM&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;Reached LimitError at &quot;</span> <span class="o">+</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">TS</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="s">&quot;</span><span class="si">% o</span><span class="s">n &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">TS</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s">&quot; tablespace&quot;</span><span class="p">))</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Flt&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Unt&quot;</span><span class="p">,</span><span class="s">&quot;Percent&quot;</span><span class="p">)</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getData</span><span class="p">(</span><span class="s">&quot;Val&quot;</span><span class="p">,</span><span class="n">Val</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">x</span></div></div>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    def Bool(self, Val):</span>
+<span class="sd">        # verify if is TRUE send OK MSG else Error</span>
+<span class="sd">        if (Val == 1):</span>
+<span class="sd">            x = self.getData(&quot;TXT&quot;,&quot;wms database is active, ok!&quot;)</span>
+<span class="sd">        else:</span>
+<span class="sd">            x = (self.getData(&quot;TXT&quot;,&quot;WMS DATABASE IS DOWN :(&quot;) +</span>
+<span class="sd">                self.getData(&quot;ERR&quot;,1))</span>
+<span class="sd">        return x</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+   <span class="k">pass</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, David Eugenio Perez Negron Rocha.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

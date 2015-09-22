@@ -1,0 +1,340 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The OraMon4PRTG Reference &mdash; OraMon4PRTG 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="OraMon4PRTG 1.0 documentation" href="index.html" />
+    <link rel="next" title="OraMon4PRTG Fast Install" href="FastInstall.html" />
+    <link rel="prev" title="Welcome to OraMon4PRTG’s documentation!" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-oramon4prtg-reference">
+<h1>The OraMon4PRTG Reference<a class="headerlink" href="#the-oramon4prtg-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-oramon4prtg">
+<h2>What is OraMon4PRTG?<a class="headerlink" href="#what-is-oramon4prtg" title="Permalink to this headline">¶</a></h2>
+<p>Is a set of scripts in Python to implement Oracle instances monitoring for the
+paessler’s PRTG system included as an advanced ssh script</p>
+</div>
+<div class="section" id="software-requirements">
+<h2>Software requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Python 2.7.x</li>
+<li>cx_Oracle 5.2</li>
+<li>Red Hat Enterprise Linux Server release 5.8 or above</li>
+<li>Oracle 11gR2 or above</li>
+</ul>
+</div>
+<div class="section" id="about-the-code-technical">
+<h2>About the code (Technical)<a class="headerlink" href="#about-the-code-technical" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-config">
+<span id="the-config-file"></span><h3>The config File<a class="headerlink" href="#module-config" title="Permalink to this headline">¶</a></h3>
+<p>section for DB Connection info</p>
+<dl class="data">
+<dt id="config.DbData">
+<code class="descclassname">config.</code><code class="descname">DbData</code><em class="property"> = {'username': 'SYSTEM', 'database': 'wms', 'password': 'orat3$', 'address': '127.0.0.1'}</em><a class="headerlink" href="#config.DbData" title="Permalink to this definition">¶</a></dt>
+<dd><p>format for table spaces is [ChannelName,MaxWarning,MaxError]</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="config.config">
+<em class="property">class </em><code class="descclassname">config.</code><code class="descname">config</code><a class="headerlink" href="#config.config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>The config file was designer so certain data into it can
+startup the configuration for making OraMon4PRTG work</p>
+<blockquote>
+<div><dl class="attribute">
+<dt>
+<code class="descclassname">config.</code><code class="descname">DbData</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="config.TableSpaces">
+<code class="descclassname">config.</code><code class="descname">TableSpaces</code><a class="headerlink" href="#config.TableSpaces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="module-OrMgr">
+<span id="the-ormgr-library"></span><h3>The OrMgr Library<a class="headerlink" href="#module-OrMgr" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="OrMgr.OrMgr">
+<em class="property">class </em><code class="descclassname">OrMgr.</code><code class="descname">OrMgr</code><a class="reference internal" href="_modules/OrMgr.html#OrMgr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#OrMgr.OrMgr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handling the Oracle connections</p>
+<dl class="method">
+<dt id="OrMgr.OrMgr.db_connect">
+<code class="descname">db_connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/OrMgr.html#OrMgr.db_connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#OrMgr.OrMgr.db_connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conect to the Oracle DB with Info from config.py</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="OrMgr.OrMgr.db_close">
+<code class="descname">db_close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/OrMgr.html#OrMgr.db_close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#OrMgr.OrMgr.db_close" title="Permalink to this definition">¶</a></dt>
+<dd><p>disconect cursor and database</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-Checks">
+<span id="the-checks-library"></span><h3>The Checks Library<a class="headerlink" href="#module-Checks" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Checks.Checks">
+<em class="property">class </em><code class="descclassname">Checks.</code><code class="descname">Checks</code><a class="reference internal" href="_modules/Checks.html#Checks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Checks.Checks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiple Predefined Monitoring SQL Querys</p>
+<dl class="method">
+<dt id="Checks.Checks.ChkSize">
+<code class="descname">ChkSize</code><span class="sig-paren">(</span><em>TableName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Checks.html#Checks.ChkSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Checks.Checks.ChkSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check Size in MB of a Table</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Checks.Checks.ChkRows">
+<code class="descname">ChkRows</code><span class="sig-paren">(</span><em>TableName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Checks.html#Checks.ChkRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Checks.Checks.ChkRows" title="Permalink to this definition">¶</a></dt>
+<dd><p>no funciona query verificar con que usuario se hace</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Checks.Checks.asm_volume_use">
+<code class="descname">asm_volume_use</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Checks.html#Checks.asm_volume_use"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Checks.Checks.asm_volume_use" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display Percentage usage of an ASM Table</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Checks.Checks.ChkTblSpace">
+<code class="descname">ChkTblSpace</code><span class="sig-paren">(</span><em>TableName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Checks.html#Checks.ChkTblSpace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Checks.Checks.ChkTblSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Table space usage info, output Example:
+TABLESPACE                USED_MB    FREE_MB   TOTAL_MB   PCT_FREE
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;- &#8212;&#8212;&#8212;- &#8212;&#8212;&#8212;- &#8212;&#8212;&#8212;- &#8212;&#8212;&#8212;-
+DCS_D_01                      263         31        294         11</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-XMLTags">
+<span id="the-xmltags-library"></span><h3>The XMLTags Library<a class="headerlink" href="#module-XMLTags" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="XMLTags.XMLTags">
+<em class="property">class </em><code class="descclassname">XMLTags.</code><code class="descname">XMLTags</code><a class="reference internal" href="_modules/XMLTags.html#XMLTags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#XMLTags.XMLTags" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class handles the XMLtaging for PRTG&#8217;s Advance Script
+requirements</p>
+<dl class="method">
+<dt id="XMLTags.XMLTags.getData">
+<code class="descname">getData</code><span class="sig-paren">(</span><em>Opt</em>, <em>Val</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/XMLTags.html#XMLTags.getData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#XMLTags.XMLTags.getData" title="Permalink to this definition">¶</a></dt>
+<dd><p>this function reads an Option code (see self.Codes) and a
+Value so it can append to the dictionary  tags and  return
+as an XML code</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="XMLTags.XMLTags.S3p">
+<code class="descname">S3p</code><span class="sig-paren">(</span><em>Cha</em>, <em>Unt</em>, <em>Val</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/XMLTags.html#XMLTags.S3p"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#XMLTags.XMLTags.S3p" title="Permalink to this definition">¶</a></dt>
+<dd><p>simple 3 parameters (channel, unit, value)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="XMLTags.XMLTags.ScU">
+<code class="descname">ScU</code><span class="sig-paren">(</span><em>Cha</em>, <em>CsU</em>, <em>Val</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/XMLTags.html#XMLTags.ScU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#XMLTags.XMLTags.ScU" title="Permalink to this definition">¶</a></dt>
+<dd><p>simple Custom Unit</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="XMLTags.XMLTags.SFP">
+<code class="descname">SFP</code><span class="sig-paren">(</span><em>Cha</em>, <em>Val</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/XMLTags.html#XMLTags.SFP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#XMLTags.XMLTags.SFP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple Float Percent</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="XMLTags.XMLTags.TblSpcs">
+<code class="descname">TblSpcs</code><span class="sig-paren">(</span><em>TS</em>, <em>Val</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/XMLTags.html#XMLTags.TblSpcs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#XMLTags.XMLTags.TblSpcs" title="Permalink to this definition">¶</a></dt>
+<dd><p>TS = [ChanelName,MaxWarning,Maxerror],Value</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="the-main-file">
+<h2>The Main File<a class="headerlink" href="#the-main-file" title="Permalink to this headline">¶</a></h2>
+<p><em>OraMon4PRTG requiers a main program which will be executed by the
+advance ssh script, so now we will show two examples of the usage
+and development of this final script.</em></p>
+<div class="section" id="example-the-functions-caller">
+<h3>Example: The functions caller<a class="headerlink" href="#example-the-functions-caller" title="Permalink to this headline">¶</a></h3>
+<p>This may or not be the basic example of usage for the PRTG advance
+script monitor,the main idea is to reduce the code with the
+<a class="reference internal" href="#module-XMLTags" title="XMLTags"><code class="xref py py-class docutils literal"><span class="pre">XMLTags</span></code></a>
+library and make your own special type of querys so that they can satisfy
+your needs for display data at the PRTG ssh advace script.
+It is also possible to include your own Querys in the
+<a class="reference internal" href="#module-Checks" title="Checks"><code class="xref py py-class docutils literal"><span class="pre">Checks</span></code></a>
+Library so you can monitor special issues into your Oracle Database.</p>
+<p>Now here is the example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python2.7</span>
+
+<span class="kn">from</span> <span class="nn">Checks</span> <span class="kn">import</span> <span class="n">Checks</span>
+<span class="kn">from</span> <span class="nn">XMLTags</span> <span class="kn">import</span> <span class="n">XMLTags</span>
+<span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">TableSpaces</span> <span class="k">as</span> <span class="n">TableSpaces</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">XMLTags</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">getData</span>
+    <span class="n">ChCk</span><span class="o">=</span><span class="n">Checks</span><span class="p">()</span>
+    <span class="n">ChCk</span><span class="o">.</span><span class="n">db_connect</span><span class="p">()</span>
+    <span class="n">TSGet</span> <span class="o">=</span> <span class="n">TableSpaces</span><span class="o">.</span><span class="n">get</span>
+
+    <span class="k">print</span> <span class="n">x</span><span class="p">(</span><span class="s">&quot;PRT&quot;</span><span class="p">,</span>
+            <span class="n">X</span><span class="o">.</span><span class="n">ScU</span><span class="p">(</span><span class="s">&quot;Size of DLYTRN&quot;</span><span class="p">,</span><span class="s">&quot;MegaBytes&quot;</span><span class="p">,</span>
+                <span class="n">ChCk</span><span class="o">.</span><span class="n">ChkSize</span><span class="p">(</span><span class="s">&#39;DLYTRN&#39;</span><span class="p">))</span> <span class="o">+</span>
+            <span class="n">X</span><span class="o">.</span><span class="n">S3p</span><span class="p">(</span><span class="s">&quot;Count Rows of DLYTRN&quot;</span><span class="p">,</span><span class="s">&quot;Count&quot;</span><span class="p">,</span>
+                <span class="n">ChCk</span><span class="o">.</span><span class="n">ChkRows</span><span class="p">(</span><span class="s">&#39;DLYTRN&#39;</span><span class="p">))</span> <span class="o">+</span>
+            <span class="n">X</span><span class="o">.</span><span class="n">SFP</span><span class="p">(</span><span class="s">&quot;ASM DATA percent usage&quot;</span><span class="p">,</span>
+                <span class="n">ChCk</span><span class="o">.</span><span class="n">asm_volume_use</span><span class="p">(</span><span class="s">&#39;DATA&#39;</span><span class="p">))</span> <span class="o">+</span>
+            <span class="n">X</span><span class="o">.</span><span class="n">TblSpcs</span><span class="p">(</span><span class="n">TSGet</span><span class="p">(</span><span class="s">&#39;SYSTEM&#39;</span><span class="p">),</span><span class="mi">50</span><span class="p">))</span>
+    <span class="n">ChCk</span><span class="o">.</span><span class="n">db_close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>As you can see we predefined this functions into the
+<a class="reference internal" href="#module-XMLTags" title="XMLTags"><code class="xref py py-class docutils literal"><span class="pre">XMLTags</span></code></a>
+Library for satisfying our monitoring needs in the Oracle DB.</p>
+<p>hope you can do the same with this code ;)</p>
+</div>
+<div class="section" id="example-the-table-spaces-example">
+<h3>Example: The table Spaces Example<a class="headerlink" href="#example-the-table-spaces-example" title="Permalink to this headline">¶</a></h3>
+<p>The next example shows how with the TableSpaces from The
+<a class="reference internal" href="#module-config" title="config"><code class="xref py py-class docutils literal"><span class="pre">config</span></code></a>
+file we wrote a list tof tablesspaces which are configure in order
+to be consulted and display them in the PRTG monitor as
+one channel per tablespace.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python2.7</span>
+
+<span class="kn">from</span> <span class="nn">Checks</span> <span class="kn">import</span> <span class="n">Checks</span>
+<span class="kn">from</span> <span class="nn">XMLTags</span> <span class="kn">import</span> <span class="n">XMLTags</span>
+<span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">TableSpaces</span> <span class="k">as</span> <span class="n">TableSpaces</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">XMLTags</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">getData</span>
+    <span class="n">ChCk</span><span class="o">=</span><span class="n">Checks</span><span class="p">()</span>
+    <span class="n">ChCk</span><span class="o">.</span><span class="n">db_connect</span><span class="p">()</span>
+    <span class="n">TSGet</span> <span class="o">=</span> <span class="n">TableSpaces</span><span class="o">.</span><span class="n">get</span>
+
+    <span class="k">print</span> <span class="s">&quot;&lt;prtg&gt;&quot;</span>
+
+    <span class="k">for</span> <span class="n">keys</span><span class="p">,</span><span class="n">values</span> <span class="ow">in</span> <span class="n">TableSpaces</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">print</span> <span class="n">X</span><span class="o">.</span><span class="n">TblSpcs</span><span class="p">(</span><span class="n">TSGet</span><span class="p">(</span><span class="n">keys</span><span class="p">),</span><span class="n">ChCk</span><span class="o">.</span><span class="n">ChkTblSpace</span><span class="p">(</span><span class="n">keys</span><span class="p">)),</span>
+    <span class="k">print</span> <span class="s">&quot;&lt;/prtg&gt;&quot;</span>
+    <span class="n">ChCk</span><span class="o">.</span><span class="n">db_close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>NOTE: <strong>since this function TblSpacs is recursive we may need to start and finish with the &lt;prtg&gt;&lt;/prtg&gt; format.</strong></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The OraMon4PRTG Reference</a><ul>
+<li><a class="reference internal" href="#what-is-oramon4prtg">What is OraMon4PRTG?</a></li>
+<li><a class="reference internal" href="#software-requirements">Software requirements</a></li>
+<li><a class="reference internal" href="#about-the-code-technical">About the code (Technical)</a><ul>
+<li><a class="reference internal" href="#module-config">The config File</a></li>
+<li><a class="reference internal" href="#module-OrMgr">The OrMgr Library</a></li>
+<li><a class="reference internal" href="#module-Checks">The Checks Library</a></li>
+<li><a class="reference internal" href="#module-XMLTags">The XMLTags Library</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-main-file">The Main File</a><ul>
+<li><a class="reference internal" href="#example-the-functions-caller">Example: The functions caller</a></li>
+<li><a class="reference internal" href="#example-the-table-spaces-example">Example: The table Spaces Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to OraMon4PRTG&#8217;s documentation!</a></li>
+      <li>Next: <a href="FastInstall.html" title="next chapter">OraMon4PRTG Fast Install</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, David Eugenio Perez Negron Rocha.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="_sources/api.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

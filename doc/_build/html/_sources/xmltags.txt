@@ -1,0 +1,6 @@
+
+The XMLTags Library
+-------------------
+.. automodule:: XMLTags
+   :members:
+   :member-order: bysource
