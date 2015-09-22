@@ -57,73 +57,109 @@ paessler’s PRTG system included as an advanced ssh script</p>
 </div>
 <div class="section" id="about-the-code-technical">
 <h2>About the code (Technical)<a class="headerlink" href="#about-the-code-technical" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="module-config">
-<span id="the-config-file"></span><h3>The config File<a class="headerlink" href="#module-config" title="Permalink to this headline">¶</a></h3>
-<p>Copyright 2015 David Eugenio Perez Negron Rocha</p>
-<p>This file is part of OraMon4PRTG.</p>
-<p>OraMon4PRTG is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
-<p>OraMon4PRTG is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
-<p>You should have received a copy of the GNU General Public License along with OraMon4PRTG. If not, see <a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
-<dl class="data">
-<dt id="config.DbData">
-<code class="descclassname">config.</code><code class="descname">DbData</code><em class="property"> = {'username': 'SYSTEM', 'database': 'wms', 'password': 'orat3$', 'address': '127.0.0.1'}</em><a class="headerlink" href="#config.DbData" title="Permalink to this definition">¶</a></dt>
-<dd><p>format for table spaces is [ChannelName,MaxWarning,MaxError]</p>
-</dd></dl>
-
+<div class="section" id="the-config-file">
+<h3>The config File<a class="headerlink" href="#the-config-file" title="Permalink to this headline">¶</a></h3>
+<p><em>The config file was designer so certain data into it can
+startup the configuration for making OraMon4PRTG work</em></p>
+<span class="target" id="module-config"></span><p>section for DB Connection info</p>
 <dl class="class">
 <dt id="config.config">
 <em class="property">class </em><code class="descclassname">config.</code><code class="descname">config</code><a class="headerlink" href="#config.config" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<p>The config file was designer so certain data into it can
-startup the configuration for making OraMon4PRTG work</p>
-<blockquote>
-<div><dl class="attribute">
-<dt>
-<code class="descclassname">config.</code><code class="descname">DbData</code></dt>
+<dl class="attribute">
+<dt id="config.DbData">
+<code class="descclassname">config.</code><code class="descname">DbData</code><a class="headerlink" href="#config.DbData" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<p><em>section for DB connection datausername,password,address,database</em></p>
 <dl class="attribute">
 <dt id="config.TableSpaces">
 <code class="descclassname">config.</code><code class="descname">TableSpaces</code><a class="headerlink" href="#config.TableSpaces" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</div></blockquote>
+<p><em>format for table spaces is [ChannelName,MaxWarning,MaxError]</em></p>
 </div>
 <div class="section" id="the-ormgr-library">
 <h3>The OrMgr Library<a class="headerlink" href="#the-ormgr-library" title="Permalink to this headline">¶</a></h3>
-<p>The OrMgr Library Handles the connections to the Oracle
-Database, it takes as parameters the data into the
-<a href="#id1"><span class="problematic" id="id2">:attribute:`DbData`</span></a>
-also imports the cx_Oracle Library, so it can do it&#8217;s job.</p>
+<p><em>The OrMgr Library Handles the connections to the Oracle
+Database, it takes as parameters the data into the DbData at</em>
+<a class="reference internal" href="#module-config" title="config"><code class="xref py py-class docutils literal"><span class="pre">config</span></code></a>
+<em>file which also imports the cx_Oracle Library, so it can do it&#8217;s job.</em></p>
+<span class="target" id="module-OrMgr"></span><dl class="class">
+<dt id="OrMgr.OrMgr">
+<em class="property">class </em><code class="descclassname">OrMgr.</code><code class="descname">OrMgr</code><a class="headerlink" href="#OrMgr.OrMgr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handling the Oracle connections</p>
+<dl class="method">
+<dt id="OrMgr.OrMgr.db_connect">
+<code class="descname">db_connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#OrMgr.OrMgr.db_connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conect to the Oracle DB with Info from config.py</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="OrMgr.OrMgr.db_close">
+<code class="descname">db_close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#OrMgr.OrMgr.db_close" title="Permalink to this definition">¶</a></dt>
+<dd><p>disconect cursor and database</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="the-checks-library">
 <h3>The Checks Library<a class="headerlink" href="#the-checks-library" title="Permalink to this headline">¶</a></h3>
-<p>The Checks Library is a set of Oracle querys defined as methods,
+<p><em>The Checks Library is a set of Oracle querys defined as methods,
 its work is to provide the Querys to be called so that a DBA
 that has no knowledge on the code can easily help the developer
-to make special monitoring querys.</p>
+to make special monitoring querys.</em></p>
+<span class="target" id="module-Checks"></span><dl class="class">
+<dt id="Checks.Checks">
+<em class="property">class </em><code class="descclassname">Checks.</code><code class="descname">Checks</code><a class="headerlink" href="#Checks.Checks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiple Predefined Monitoring SQL Querys</p>
+<dl class="method">
+<dt id="Checks.Checks.ChkSize">
+<code class="descname">ChkSize</code><span class="sig-paren">(</span><em>TableName</em><span class="sig-paren">)</span><a class="headerlink" href="#Checks.Checks.ChkSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check Size in MB of a Table</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Checks.Checks.ChkRows">
+<code class="descname">ChkRows</code><span class="sig-paren">(</span><em>TableName</em><span class="sig-paren">)</span><a class="headerlink" href="#Checks.Checks.ChkRows" title="Permalink to this definition">¶</a></dt>
+<dd><p>no funciona query verificar con que usuario se hace</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Checks.Checks.asm_volume_use">
+<code class="descname">asm_volume_use</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#Checks.Checks.asm_volume_use" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display Percentage usage of an ASM Table</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Checks.Checks.ChkTblSpace">
+<code class="descname">ChkTblSpace</code><span class="sig-paren">(</span><em>TableName</em><span class="sig-paren">)</span><a class="headerlink" href="#Checks.Checks.ChkTblSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Table space usage info, output Example:
+TABLESPACE                USED_MB    FREE_MB   TOTAL_MB   PCT_FREE
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;- &#8212;&#8212;&#8212;- &#8212;&#8212;&#8212;- &#8212;&#8212;&#8212;- &#8212;&#8212;&#8212;-
+DCS_D_01                      263         31        294         11</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="the-xmltags-library">
 <h3>The XMLTags Library<a class="headerlink" href="#the-xmltags-library" title="Permalink to this headline">¶</a></h3>
-<p>The XMLTags Library is a sorter implementation of the xml format
+<p><em>The XMLTags Library is a shorter implementation of the xml format
 so you can build methods faster usage calling the Checks Library
 and printing in the XMLs PRTG format needed to display channels
 with the data, you can develop your own methods for satifying your
-needs.</p>
-<span class="target" id="module-XMLTags"></span><p>Copyright 2015 David Eugenio Perez Negron Rocha</p>
-<p>This file is part of OraMon4PRTG.</p>
-<p>OraMon4PRTG is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
-<p>OraMon4PRTG is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
-<p>You should have received a copy of the GNU General Public License along with OraMon4PRTG. If not, see <a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
-<dl class="class">
+needs.</em></p>
+<span class="target" id="module-XMLTags"></span><dl class="class">
 <dt id="XMLTags.XMLTags">
-<em class="property">class </em><code class="descclassname">XMLTags.</code><code class="descname">XMLTags</code><a class="reference internal" href="_modules/XMLTags.html#XMLTags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#XMLTags.XMLTags" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">XMLTags.</code><code class="descname">XMLTags</code><a class="headerlink" href="#XMLTags.XMLTags" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class handles the XMLtaging for PRTG&#8217;s Advance Script
 requirements</p>
 <dl class="method">
 <dt id="XMLTags.XMLTags.getData">
-<code class="descname">getData</code><span class="sig-paren">(</span><em>Opt</em>, <em>Val</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/XMLTags.html#XMLTags.getData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#XMLTags.XMLTags.getData" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getData</code><span class="sig-paren">(</span><em>Opt</em>, <em>Val</em><span class="sig-paren">)</span><a class="headerlink" href="#XMLTags.XMLTags.getData" title="Permalink to this definition">¶</a></dt>
 <dd><p>this function reads an Option code (see self.Codes) and a
 Value so it can append to the dictionary  tags and  return
 as an XML code</p>
@@ -131,25 +167,25 @@ as an XML code</p>
 
 <dl class="method">
 <dt id="XMLTags.XMLTags.S3p">
-<code class="descname">S3p</code><span class="sig-paren">(</span><em>Cha</em>, <em>Unt</em>, <em>Val</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/XMLTags.html#XMLTags.S3p"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#XMLTags.XMLTags.S3p" title="Permalink to this definition">¶</a></dt>
+<code class="descname">S3p</code><span class="sig-paren">(</span><em>Cha</em>, <em>Unt</em>, <em>Val</em><span class="sig-paren">)</span><a class="headerlink" href="#XMLTags.XMLTags.S3p" title="Permalink to this definition">¶</a></dt>
 <dd><p>simple 3 parameters (channel, unit, value)</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="XMLTags.XMLTags.ScU">
-<code class="descname">ScU</code><span class="sig-paren">(</span><em>Cha</em>, <em>CsU</em>, <em>Val</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/XMLTags.html#XMLTags.ScU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#XMLTags.XMLTags.ScU" title="Permalink to this definition">¶</a></dt>
+<code class="descname">ScU</code><span class="sig-paren">(</span><em>Cha</em>, <em>CsU</em>, <em>Val</em><span class="sig-paren">)</span><a class="headerlink" href="#XMLTags.XMLTags.ScU" title="Permalink to this definition">¶</a></dt>
 <dd><p>simple Custom Unit</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="XMLTags.XMLTags.SFP">
-<code class="descname">SFP</code><span class="sig-paren">(</span><em>Cha</em>, <em>Val</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/XMLTags.html#XMLTags.SFP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#XMLTags.XMLTags.SFP" title="Permalink to this definition">¶</a></dt>
+<code class="descname">SFP</code><span class="sig-paren">(</span><em>Cha</em>, <em>Val</em><span class="sig-paren">)</span><a class="headerlink" href="#XMLTags.XMLTags.SFP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simple Float Percent</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="XMLTags.XMLTags.TblSpcs">
-<code class="descname">TblSpcs</code><span class="sig-paren">(</span><em>TS</em>, <em>Val</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/XMLTags.html#XMLTags.TblSpcs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#XMLTags.XMLTags.TblSpcs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">TblSpcs</code><span class="sig-paren">(</span><em>TS</em>, <em>Val</em><span class="sig-paren">)</span><a class="headerlink" href="#XMLTags.XMLTags.TblSpcs" title="Permalink to this definition">¶</a></dt>
 <dd><p>TS = [ChanelName,MaxWarning,Maxerror],Value</p>
 </dd></dl>
 
@@ -170,7 +206,7 @@ script monitor,the main idea is to reduce the code with the
 library and make your own special type of querys so that they can satisfy
 your needs for display data at the PRTG ssh advace script.
 It is also possible to include your own Querys in the
-<code class="xref py py-class docutils literal"><span class="pre">Checks</span></code>
+<a class="reference internal" href="#module-Checks" title="Checks"><code class="xref py py-class docutils literal"><span class="pre">Checks</span></code></a>
 Library so you can monitor special issues into your Oracle Database.</p>
 <p>Now here is the example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python2.7</span>
@@ -245,7 +281,7 @@ one channel per tablespace.</p>
 <li><a class="reference internal" href="#what-is-oramon4prtg">What is OraMon4PRTG?</a></li>
 <li><a class="reference internal" href="#software-requirements">Software requirements</a></li>
 <li><a class="reference internal" href="#about-the-code-technical">About the code (Technical)</a><ul>
-<li><a class="reference internal" href="#module-config">The config File</a></li>
+<li><a class="reference internal" href="#the-config-file">The config File</a></li>
 <li><a class="reference internal" href="#the-ormgr-library">The OrMgr Library</a></li>
 <li><a class="reference internal" href="#the-checks-library">The Checks Library</a></li>
 <li><a class="reference internal" href="#the-xmltags-library">The XMLTags Library</a></li>

@@ -20,38 +20,40 @@ About the code (Technical)
 
 The config File
 ~~~~~~~~~~~~~~~~
+
+*The config file was designer so certain data into it can 
+startup the configuration for making OraMon4PRTG work*
+
 .. automodule:: config
-   :members:   
-
 .. class:: config
+.. attribute:: DbData
 
-The config file was designer so certain data into it can 
-startup the configuration for making OraMon4PRTG work
+*section for DB connection datausername,password,address,database*
 
-   .. attribute:: DbData
-   
-   .. attribute:: TableSpaces
+.. attribute:: TableSpaces
+  
+*format for table spaces is [ChannelName,MaxWarning,MaxError]*
 
+  
 The OrMgr Library
 ~~~~~~~~~~~~~~~~~~
 
-The OrMgr Library Handles the connections to the Oracle
-Database, it takes as parameters the data into the 
-:attribute:`DbData`
-also imports the cx_Oracle Library, so it can do it's job.
+*The OrMgr Library Handles the connections to the Oracle
+Database, it takes as parameters the data into the DbData at*
+:class:`config`
+*file which also imports the cx_Oracle Library, so it can do it's job.*
 
 .. automodule:: OrMgr
-.. autoclass:: OrMgr
    :members:
    :member-order: bysource
 
 The Checks Library
 ~~~~~~~~~~~~~~~~~~~
 
-The Checks Library is a set of Oracle querys defined as methods,
+*The Checks Library is a set of Oracle querys defined as methods,
 its work is to provide the Querys to be called so that a DBA 
 that has no knowledge on the code can easily help the developer
-to make special monitoring querys.
+to make special monitoring querys.*
 
 .. automodule:: Checks
    :members:
@@ -60,11 +62,11 @@ to make special monitoring querys.
 The XMLTags Library
 ~~~~~~~~~~~~~~~~~~~
 
-The XMLTags Library is a sorter implementation of the xml format
+*The XMLTags Library is a shorter implementation of the xml format
 so you can build methods faster usage calling the Checks Library
 and printing in the XMLs PRTG format needed to display channels
 with the data, you can develop your own methods for satifying your
-needs.
+needs.*
 
 .. automodule:: XMLTags
    :members:
