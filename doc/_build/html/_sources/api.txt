@@ -34,6 +34,12 @@ startup the configuration for making OraMon4PRTG work
 
 The OrMgr Library
 ~~~~~~~~~~~~~~~~~~
+
+The OrMgr Library Handles the connections to the Oracle
+Database, it takes as parameters the data into the 
+:attribute:`DbData`
+also imports the cx_Oracle Library, so it can do it's job.
+
 .. automodule:: OrMgr
 .. autoclass:: OrMgr
    :members:
@@ -41,12 +47,25 @@ The OrMgr Library
 
 The Checks Library
 ~~~~~~~~~~~~~~~~~~~
+
+The Checks Library is a set of Oracle querys defined as methods,
+its work is to provide the Querys to be called so that a DBA 
+that has no knowledge on the code can easily help the developer
+to make special monitoring querys.
+
 .. automodule:: Checks
    :members:
    :member-order: bysource
 
 The XMLTags Library
 ~~~~~~~~~~~~~~~~~~~
+
+The XMLTags Library is a sorter implementation of the xml format
+so you can build methods faster usage calling the Checks Library
+and printing in the XMLs PRTG format needed to display channels
+with the data, you can develop your own methods for satifying your
+needs.
+
 .. automodule:: XMLTags
    :members:
    :member-order: bysource
@@ -100,7 +119,7 @@ Library for satisfying our monitoring needs in the Oracle DB.
 
 hope you can do the same with this code ;)
 
-Example: The table Spaces Example
+Example: The table Spaces monitor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The next example shows how with the TableSpaces from The 

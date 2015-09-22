@@ -42,4 +42,12 @@ file
 
 Add ssh script advance into prtg
 --------------------------------
+There is quiet lots of tutorials how to add this, but as fast to remember
+you must add the ssh with permissions for execution of the Main script as
+ssh login user and password, PRTG automatically will verify this and you
+also must select the script to use in our example it might be the **Main.py**
+
+however there is always a documentation about this by the PRTG developers `LinkPrtgSSHAS`_.
+
+.. _LinkPrtgSSHAS: https://www.paessler.com/manuals/prtg/ssh_script_advanced_sensor
 
